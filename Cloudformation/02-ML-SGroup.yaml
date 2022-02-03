@@ -1,0 +1,60 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: >-
+  Security Groups: En este template se desploya todos los Security Groups necesarios para definicion de reglas inboud y outbound de cada recurso asociado
+  al mismo.
+
+######################
+# Parameters section
+######################
+
+Parameters:
+
+  VpcidML:
+    Description: VPCs
+    Type: AWS::EC2::VPC::Id
+
+######################
+# Resources section
+######################
+
+Resources:
+
+################################################################################
+##          Server RDS SG
+###############################################################################
+  RDSSecurityGroupML:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable Postgres ingress
+      VpcId:
+            !Ref VpcidML
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 5432
+          ToPort: 5432
+          CidrIp: 10.10.0.0/24
+        - IpProtocol: tcp
+          FromPort: 5432
+          ToPort: 5432
+          CidrIp: 10.10.1.0/24
+      Tags:
+        - Key: Name
+          Value: Postgres RDS Security Group
+
+################################################################################
+##          EKS SG
+###############################################################################
+  EKSSecurityGroupML:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable EKS ingress
+      VpcId:
+            !Ref VpcidML
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 1
+          ToPort: 65000
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: EKS Security Group

@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: >-
+  Node Group Template: Grupos de nodo que se adjuntaran al cluster de EKS
+
+######################
+# Parameters section
+######################
+
+Parameters:
+
+  MLNodeSubnets:
+    Description: A list of subnets to use when launching EKS Nodes
+    Type: 'List<AWS::EC2::Subnet::Id>'
+
+  MLEKSSecurityGroup:
+    Description: Security Group EKS
+    Type: 'List<AWS::EC2::SecurityGroup::Id>'
+
+
+Resources:
+  EKSNodegroup:
+    Type: 'AWS::EKS::Nodegroup'
+    Properties:
+      ClusterName: ML-EKS
+      DiskSize: 50
+      NodegroupName: ML-WKR
+      NodeRole: 'arn:aws:iam::456441140195:role/LabRole'
+      ScalingConfig:
+        MinSize: 3
+        DesiredSize: 3
+        MaxSize: 3
+      Subnets: !Ref MLNodeSubnets
+

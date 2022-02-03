@@ -1,0 +1,87 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: >-
+  Template RDS  - En este se desploya un server postgres con una instancia master y otra standby en dos AZ utilizado por Airflow al procesar
+  el DAG ETL y guardar la data proveniente del dataset raw en el S3
+
+######################################
+#
+#     Parameter seccion for RDS Administracion
+#######################################
+
+Parameters:
+
+  DBInstanceIdentifier:
+    Type: String
+    Default: "ml-rds-postgres"
+
+  DatabaseMasterUsername:
+    AllowedPattern: '^([a-zA-Z0-9]*)$'
+    Description: The Amazon RDS master username.
+    ConstraintDescription: Must contain only alphanumeric characters (minimum 8; maximum 16).
+    MaxLength: 16
+    MinLength: 3
+    Type: String
+  DatabaseMasterPassword:
+    AllowedPattern: '^([a-zA-Z0-9`~!#$%^&*()_+,\\-])*$'
+    ConstraintDescription: >-
+      Must be letters (upper or lower), numbers, spaces, and these special
+      characters `~!#$%^&*()_+,-
+    Description: >-
+      The Amazon RDS master password. Letters, numbers, spaces, and these
+      special characters `~!#$%^&*()_+,-
+    MaxLength: 41
+    MinLength: 8
+    NoEcho: true
+    Type: String
+
+  DatabaseSecurityGroup:
+    Description: Security Group RDS
+    Type: 'List<AWS::EC2::SecurityGroup::Id>'
+
+  DataBaseSubnets:
+    Description: A list of subnets to use when launching Postgres
+    Type: 'List<AWS::EC2::Subnet::Id>'
+
+Mappings:
+  EnvironmentToInstanceType:
+    dev:
+      InstanceType: t2.nano
+    test:
+      InstanceType: t2.micro
+    prod:
+      InstanceType: t2.small
+      
+######################
+# RDS section
+######################
+
+Resources:
+
+  MLDatabase:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceIdentifier: !Ref DBInstanceIdentifier
+      AllocatedStorage: "5"
+      DBInstanceClass: db.t3.micro
+      DBSubnetGroupName: !Ref DataSubnetGroup
+      Engine: postgres
+      MasterUsername: !Ref DatabaseMasterUsername
+      MasterUserPassword: !Ref DatabaseMasterPassword
+      MultiAZ: true
+      VPCSecurityGroups: !Ref DatabaseSecurityGroup
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: b0f6fd3b-ad5e-483c-b996-0333372eb710
+  DataSubnetGroup:
+    Type: 'AWS::RDS::DBSubnetGroup'
+    Properties:
+      DBSubnetGroupDescription: RDS Database Subnet Group
+      SubnetIds: !Ref DataBaseSubnets
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 5e75a771-275d-42cf-850c-575883b21d56
+      Tags:
+        - Key: Name
+          Value: ML RDS Postgres
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete

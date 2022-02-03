@@ -1,0 +1,133 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: >-
+  Network - En este script se desploya toda la red necesaria para la implementacion de la infraestructura, como VPC, subnets, etc
+
+Parameters:
+
+  EnvironmentName:
+    Description: Definicion del nombre del entorno
+    Type: String
+    Default:        "ML-Network"
+
+######################
+# Resources section
+######################
+
+Resources:
+
+  ## VPC-ML
+
+  VPCML:
+    Type: AWS::EC2::VPC
+    Properties:
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      CidrBlock: 10.10.0.0/16
+      Tags:
+        - Key: Name
+          Value: ML VPC
+
+  ## Internet Gateway ML
+
+  IGWML:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: IGW-ML
+
+  IGWMLAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId: !Ref IGWML
+      VpcId: !Ref VPCML
+
+  ## Subnets
+
+  PublicSubnetML1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPCML
+      AvailabilityZone: us-east-1a
+      CidrBlock: 10.10.0.0/24
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName} Public Subnet ML 1
+
+  PublicSubnetML2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPCML
+      AvailabilityZone: us-east-1b
+      CidrBlock: 10.10.1.0/24
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName} Public Subnet ML 2
+
+  PrivateSubnetML1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPCML
+      AvailabilityZone: us-east-1a
+      CidrBlock: 10.10.2.0/24
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName} Private Subnet ML 1
+
+  PrivateSubnetML2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPCML
+      AvailabilityZone: us-east-1b
+      CidrBlock: 10.10.3.0/24
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName} Private Subnet ML 2
+
+  PrivateSubnetECS:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPCML
+      AvailabilityZone: us-east-1c
+      CidrBlock: 10.10.4.0/24
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName} Private Subnet ECS 1
+
+#####################################################
+#
+#                  Routing Tables
+#
+#####################################################
+
+  DefaultTableRouteML:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPCML
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName} Public Routes ML
+
+  DefaultPublicRouteML1:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref DefaultTableRouteML
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref IGWML
+
+  DefaultSubnet1RouteTableAssociation1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref DefaultTableRouteML
+      SubnetId: !Ref PublicSubnetML1
+
+  DefaultSubnet2RouteTableAssociation2:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref DefaultTableRouteML
+      SubnetId: !Ref PublicSubnetML2

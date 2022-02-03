@@ -1,0 +1,46 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: >-
+  Buckets S#: En este template se desploya 3 buckets de S3 en los cuales se guardaran los logs de airflow, dataset raw y modelos
+  y graficos de analisis
+
+######################
+# Resources section
+######################
+
+Resources:
+
+#######################################################################################
+##
+##                           S3 Airflow logs
+##
+#######################################################################################
+
+  S3MLAirflow:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: ml-airflow-s3
+      AccessControl: PublicRead
+
+#######################################################################################
+##
+##                          S3 Datasets Raw     
+##
+#######################################################################################
+
+  S3MLDatasetRaw:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: ml-dataset-raw-s3
+      AccessControl: PublicRead
+
+#######################################################################################
+##
+##                          Models & Graphs    
+##
+#######################################################################################
+
+  S3MLModelsGraphs:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: ml-modelsgraphss3
+      AccessControl: PublicRead

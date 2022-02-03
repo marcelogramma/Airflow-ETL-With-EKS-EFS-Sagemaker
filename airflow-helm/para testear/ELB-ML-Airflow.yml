@@ -1,0 +1,16 @@
+## Por el momento no es necesario desployarlo ya que se púede hacer un portfowrd al localhost y entrar por ahi. A la brevedad voy a 
+## ver de hacer funcionar el LB 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ml-elb-airflow
+  namespace: default
+spec:
+  selector:
+    app: ml-airflow-web
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
