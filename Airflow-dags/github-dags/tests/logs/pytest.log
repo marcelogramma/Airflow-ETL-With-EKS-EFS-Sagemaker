@@ -1,0 +1,135 @@
+============================= test session starts ==============================
+platform linux -- Python 3.9.9, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+rootdir: /test/tests
+collecting ... collected 4 items
+
+data/core/test_api_core_status.py::test_api_status_content_amzn PASSED   [ 25%]
+data/core/test_api_core_status.py::test_api_content_goog PASSED          [ 50%]
+data/core/test_db_core_operate.py::test_sql_conn_db PASSED               [ 75%]
+data/core/test_db_core_operate.py::test_sql_create_operate_table PASSED  [100%]
+
+============================== 4 passed in 10.69s ==============================
+================================================================== test session starts ==================================================================
+platform linux -- Python 3.7.12, pytest-6.2.5, py-1.10.0, pluggy-1.0.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+rootdir: /opt/airflow/tests
+plugins: anyio-3.3.3
+collecting ... 
+collecting 3 items                                                                                                                                      
+collected 4 items                                                                                                                                       
+
+data/dags-test/test_aggregation_data.py::test_aggregation_avg_amzn PASSED                                                                         [ 25%]
+data/dags-test/test_aggregation_data.py::test_aggregation_avg_goog PASSED                                                                         [ 50%]
+data/dags-test/test_aggregation_data.py::test_aggregation_avg_msft PASSED                                                                         [ 75%]
+data/dags-test/test_dummydag_plot.py::test_query_for_plots PASSED                                                                                 [100%]
+
+================================================================== [32m[1m4 passed[0m[32m in 16.58s[0m[32m ===================================================================
+============================= test session starts ==============================
+platform linux -- Python 3.9.9, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+rootdir: /test/tests
+collecting ... collected 4 items
+
+data/core/test_api_core_status.py::test_api_status_content_amzn PASSED   [ 25%]
+data/core/test_api_core_status.py::test_api_content_goog PASSED          [ 50%]
+data/core/test_db_core_operate.py::test_sql_conn_db PASSED               [ 75%]
+data/core/test_db_core_operate.py::test_sql_create_operate_table PASSED  [100%]
+
+============================== 4 passed in 2.61s ===============================
+============================= test session starts ==============================
+platform linux -- Python 3.9.10, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+rootdir: /test/tests
+collecting ... collected 4 items
+
+data/core/test_api_core_status.py::test_api_status_content_amzn PASSED   [ 25%]
+data/core/test_api_core_status.py::test_api_content_goog PASSED          [ 50%]
+data/core/test_db_core_operate.py::test_sql_conn_db PASSED               [ 75%]
+data/core/test_db_core_operate.py::test_sql_create_operate_table PASSED  [100%]
+
+============================== 4 passed in 5.35s ===============================
+============================= test session starts ==============================
+platform linux -- Python 3.9.10, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+rootdir: /test/tests
+collecting ... collected 4 items
+
+data/core/test_api_core_status.py::test_api_status_content_amzn PASSED   [ 25%]
+data/core/test_api_core_status.py::test_api_content_goog PASSED          [ 50%]
+data/core/test_db_core_operate.py::test_sql_conn_db PASSED               [ 75%]
+data/core/test_db_core_operate.py::test_sql_create_operate_table PASSED  [100%]
+
+============================== 4 passed in 1.19s ===============================
+============================= test session starts ==============================
+platform linux -- Python 3.9.10, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+rootdir: /test/tests
+collecting ... collected 4 items
+
+data/core/test_api_core_status.py::test_api_status_content_amzn PASSED   [ 25%]
+data/core/test_api_core_status.py::test_api_content_goog PASSED          [ 50%]
+data/core/test_db_core_operate.py::test_sql_conn_db PASSED               [ 75%]
+data/core/test_db_core_operate.py::test_sql_create_operate_table PASSED  [100%]
+
+============================== 4 passed in 0.52s ===============================
+============================= test session starts ==============================
+platform linux -- Python 3.9.10, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+rootdir: /test/tests
+collecting ... collected 4 items
+
+data/core/test_api_core_status.py::test_api_status_content_amzn PASSED   [ 25%]
+data/core/test_api_core_status.py::test_api_content_goog PASSED          [ 50%]
+data/core/test_db_core_operate.py::test_sql_conn_db PASSED               [ 75%]
+data/core/test_db_core_operate.py::test_sql_create_operate_table PASSED  [100%]
+
+============================== 4 passed in 0.59s ===============================
+============================= test session starts ==============================
+platform linux -- Python 3.9.10, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+rootdir: /test/tests
+collecting ... collected 4 items
+
+data/core/test_api_core_status.py::test_api_status_content_amzn PASSED   [ 25%]
+data/core/test_api_core_status.py::test_api_content_goog PASSED          [ 50%]
+data/core/test_db_core_operate.py::test_sql_conn_db PASSED               [ 75%]
+data/core/test_db_core_operate.py::test_sql_create_operate_table PASSED  [100%]
+
+============================== 4 passed in 0.53s ===============================
+============================= test session starts ==============================
+platform linux -- Python 3.9.10, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+rootdir: /test/tests
+collecting ... collected 4 items
+
+data/core/test_api_core_status.py::test_api_status_content_amzn PASSED   [ 25%]
+data/core/test_api_core_status.py::test_api_content_goog PASSED          [ 50%]
+data/core/test_db_core_operate.py::test_sql_conn_db PASSED               [ 75%]
+data/core/test_db_core_operate.py::test_sql_create_operate_table PASSED  [100%]
+
+============================== 4 passed in 0.50s ===============================
+============================= test session starts ==============================
+platform linux -- Python 3.9.10, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+rootdir: /test/tests
+collecting ... collected 4 items
+
+data/core/test_api_core_status.py::test_api_status_content_amzn PASSED   [ 25%]
+data/core/test_api_core_status.py::test_api_content_goog PASSED          [ 50%]
+data/core/test_db_core_operate.py::test_sql_conn_db PASSED               [ 75%]
+data/core/test_db_core_operate.py::test_sql_create_operate_table PASSED  [100%]
+
+============================== 4 passed in 5.87s ===============================
+============================= test session starts ==============================
+platform linux -- Python 3.9.10, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+rootdir: /test/tests
+collecting ... collected 4 items
+
+data/core/test_api_core_status.py::test_api_status_content_amzn PASSED   [ 25%]
+data/core/test_api_core_status.py::test_api_content_goog PASSED          [ 50%]
+data/core/test_db_core_operate.py::test_sql_conn_db PASSED               [ 75%]
+data/core/test_db_core_operate.py::test_sql_create_operate_table PASSED  [100%]
+
+============================== 4 passed in 7.56s ===============================
