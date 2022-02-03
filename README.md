@@ -2,11 +2,7 @@
 # Airflow ETL With EKS EFS & Sagemaker (en desarrollo) 
 <p></p>
 
-### Diagrama de la solución###
-
-# Airflow ETL With EKS EFS & Sagemaker (en desarrollo)
-
-###Diagrama de la solución
+### Diagrama de la solución ###
 
 
 [![](imgs/ML-TP_Final.drawio.png)](/imgs/ML-TP_Final.drawio.png)
