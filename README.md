@@ -1,13 +1,13 @@
-<<<<<<< HEAD
-# Airflow ETL With EKS EFS & Sagemaker (en desarrollo) #
+
+# Airflow ETL With EKS EFS & Sagemaker (en desarrollo) 
 <p></p>
 
 ### Diagrama de la solución###
-=======
+
 # Airflow ETL With EKS EFS & Sagemaker (en desarrollo)
 
 ###Diagrama de la solución
->>>>>>> 1a9388d4f77d4bcfea41967b9b3313e7a69cda76
+
 
 [![](imgs/ML-TP_Final.drawio.png)](/imgs/ML-TP_Final.drawio.png)
 
@@ -61,7 +61,7 @@ En este punto al correr el comando el siguiente comando debería aparecer un arc
 
 <br></br>
 
-####Desarrollo:####
+#### Desarrollo: ####
 1. Se configuro Airflow para que corra en AWS. Esto se puede hacer de varias maneras, pero aquí se desployo dentro de un cluster de kubernetes EKS. Se utilizo la herramienta git-sync para sincronizar los dags desde un repo CI/CD
 2. Se creo una instancia RDS de Postgres. La misma es Multi-AZ y posee instancia de backup. Esta instancia será utilizada como DB en los puntos siguientes.
 3. Se desarrollo un DAG de Airflow con schedule anual que:
@@ -84,7 +84,7 @@ la configuración.
 Notas:
 - El DAG funciona para cualquiera de los años 2009 a 2018 incluidos en el dataset. Se tiene en cuenta que si se corre dos veces para el mismo año podría haber una duplicación de datos y se resolvió.
 
-####Pasos####
+#### Pasos ####
 
 Clonamos el repositorio de la siguiente manera:
 ```git clone https://github.com/marcelogramma/Airflow-ETL-With-EKS-EFS-Sagemaker.git```
@@ -92,7 +92,7 @@ y luego ingresamos al directorio clonado.
 
 Nos dirigimos con nuestro navegador web a la consola de AWS. Una vez logueados, vamos al servicio de Cloudformation mediante el cual nos permitirá desployar la infraestructura de nuestra solución. Los yml que se utilizaran para desployar la infraestructura se encuentran en el dir /CloudFormation, los mismos son 4 archivos numerados que deben ir subiéndose uno a uno, cuando el anterior termine.
 <br></br>
-###~~Como desployar la infraestructura~~##
+### Como desployar la infraestructura ##
 
 Nos dirigimos a la herramienta CloudFormation
 <br></br>
