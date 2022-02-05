@@ -281,7 +281,7 @@ Y copiamos el ID del sistema de archivos al archivo de la imagen anterior. Guard
  
  17 - Luego de estas modificaciones, ejecutamos los siguientes comando
  
-  ```$ kubectl apply -f airflow-db-secret.yml ``` y ```$ helm install ml-airflow airflow-stable/airflow --versión 8.5.3 --values values.yml``` Nota. Debera tener instalado [HELM](https://helm.sh/docs/intro/install/) y ademas el repo [Helm Chart for Apache Airflow](https://artifacthub.io/packages/helm/apache-airflow/airflow) 
+  ```$ kubectl apply -f airflow-db-secret.yml ``` , ```$ kubectl apply -f airflow-serviceAccount.yml ``` y ```$ helm install ml-airflow airflow-stable/airflow --versión 8.5.3 --values values.yml``` Nota. Debera tener instalado [HELM](https://helm.sh/docs/intro/install/) y ademas el repo [Helm Chart for Apache Airflow](https://artifacthub.io/packages/helm/apache-airflow/airflow) 
  
  Con este ultimo comando estamos ya desployando Apache Airflow en el cluster EKS, esto demora unos minutos, aguarde y verifique que el deploy se complete normalmente
  
