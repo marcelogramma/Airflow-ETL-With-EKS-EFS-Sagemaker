@@ -150,6 +150,10 @@ Crear pila
 
 ![](imgs/20220202-213409.png)
 
+#### Importante ####
+Debera crear un usuario para airflow y asignarle una politica de permisos que tenga acceso con privilegios al bucket de S3 donde se guardan los logs. Se puede seguir esta [guia](https://www.youtube.com/watch?v=DKsWEmoqwZY) . En este tutorial no se explica, ya que se usa una cuenta de laboratorio donde no se pueden crear usuarios, por eso, no se utiliza el Bucket S3 para guardar los logs
+<br></br>
+
 8 - En este punto repetimos lo mismo con el archivo 04-ML-RDS.yaml. Tener en cuenta de seleccionar las subnets correctas. (ML-Network Private Subnet ML 1 y ML 2)
 
 ![](imgs/20220202-211032.png)
