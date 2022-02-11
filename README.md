@@ -150,6 +150,10 @@ Crear pila
 
 ![](imgs/20220202-213409.png)
 
+7.4 - ingresar al bucket ml-dataset-raw-s3, y crear la carpeta raw-out
+
+![](imgs/20220211-124239.png)
+
 #### Importante ####
 Debera crear un usuario para airflow y asignarle una politica de permisos que tenga acceso con privilegios al bucket de S3 donde se guardan los logs. Se puede seguir esta [guia](https://www.youtube.com/watch?v=DKsWEmoqwZY) . En este tutorial no se explica, ya que se usa una cuenta de laboratorio donde no se pueden crear usuarios, por eso, no se utiliza el Bucket S3 para guardar los logs
 <br></br>
