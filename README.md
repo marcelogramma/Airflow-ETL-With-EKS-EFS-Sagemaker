@@ -209,11 +209,11 @@ Definimos un nombre y el rol, el resto por defecto y hacemos siguiente
 
 Definimos el tipo de capacidad, la AMI y el tipo de instancia con su tamaño de disco
 
-![](imgs/20220202-222136.png)
+![](imgs/20220211-070917.png)
 
 La cantidad de nodos para el escalado y siguiente
 
-![](imgs/20220202-222235.png)
+![](imgs/20220211-071235.png)
 
 Dejamos seleccionadas las dos subnets que vienen (son las mismas que usa el control plane, no modificar) y el SG
 
@@ -307,13 +307,22 @@ El primero para ingresar a Airflow Web (user/pass admin admin) y el segundo al d
 
 Acá podemos ver el DAG que sincronizo desde GitHub
 
-![](imgs/20220202-234557.png)
+![](imgs/20220211-071450.png)
 
-![](imgs/20220202-234615.png)
+![](imgs/20220211-071400.png)
 
 Y el home del flower
 
-![](imgs/20220202-234644.png)
+![](imgs/20220211-071320.png)
 
+En este punto estamos ya capacitados para ejecutar el dag y asi obtener nuestro ETL ejecutado, donde en una primera instancia (E) se extrae la data desde los datasets alojados en el bucket de S3, esta estraccion se produce una por año para los años de los datasets. Luego de producirce la extraccion de los datos, tenemos la transformacion (T) donde solamente nos quedamos con la informacion del promedio del delay en las partidas por dia, por aeropuerto y año, para luego ser cargada (L) en la DB
+
+![](imgs/20220211-071849.png)
+
+Una vez que finalice este proceso, podremos ver las tablas creadas en la DB como asi tambien si queremos, explorar las mismas.
+
+![](imgs/20220211-072044.png)
+
+![](imgs/20220211-072112.png)
 
 # CONTINUARA...
