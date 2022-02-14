@@ -135,8 +135,8 @@ airflow:
       type: aws
       description: my AWS connection
       extra: |-
-        { "aws_access_key_id": "ASIAWURQDCPRU2",
-          "aws_secret_access_key": "Hvx664MEGl78dANZpsVJQSZO7/Ii/Naq1OmIJDOY",
+        { "aws_access_key_id": "ASIAVJY6K25ZPR3R34HC",
+          "aws_secret_access_key": "6xnfWYq+tf/6bsOma4K7cqlWWoDY9awAEmp6Pzva",
           "region_name":"us-east-1" 
         }
 
@@ -203,9 +203,26 @@ airflow:
     # - "https://raw.githubusercontent.com/apache/airflow/constraints-2.0.1/constraints-3.8.txt"
     - "apache-airflow-providers-amazon"
     - "awscli"
-    # - "apache-airflow[aws]==2.0.1"
-  # - "six python-dateutil boto3 botocore s3transfer jmespath urllib3 "
-  # - "watchtower"
+    - "matplotlib"
+    - "pytest"
+    - "apache-airflow[amazon]"
+    - "pandas"
+    - "numpy"
+    - "apache-airflow[s3]"
+    - "apache-airflow[postgres]"
+    - "apache-airflow[segamaker]"
+    - "apache-airflow[aws]==2.0.1"
+    - "six"
+    - "python-dateutil"
+    - "boto3"
+    - "botocore"
+    - "s3transfer"
+    - "jmespath"
+    - "urllib3"
+    - "watchtower"
+    - "awswrangler"
+    - "fsspec"
+    - "s3fs"
     
 
   ## extra environment variables for the web/scheduler/worker/flower Pods
@@ -349,7 +366,7 @@ scheduler:
   ## NOTE:
   ## - if you set this >1 we recommend defining a `scheduler.podDisruptionBudget`
   ##
-  replicas: 1
+  replicas: 4
 
   ## resource requests/limits for the scheduler Pod
   ##
@@ -639,7 +656,7 @@ workers:
   ## - if you set this >1 we recommend defining a `workers.podDisruptionBudget`
   ## - this is the minimum when `workers.autoscaling.enabled` is true
   ##
-  replicas: 1
+  replicas: 4
 
   ## resource requests/limits for the worker Pod
   ##
@@ -730,7 +747,7 @@ workers:
   ##
   autoscaling:
     enabled: false
-    maxReplicas: 2
+    maxReplicas: 6
     metrics: []
 
   ## configs for the celery worker Pods
@@ -798,7 +815,7 @@ flower:
   ## NOTE:
   ## - if you set this >1 we recommend defining a `flower.podDisruptionBudget`
   ##
-  replicas: 1
+  replicas: 4
 
   ## resource requests/limits for the flower Pod
   ##

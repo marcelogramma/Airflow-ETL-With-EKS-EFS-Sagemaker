@@ -18,7 +18,7 @@ spec:
   persistentVolumeReclaimPolicy: Delete
   storageClassName: efs-sc
   nfs:
-    server: fs-03ebdd70460398cb0.efs.us-east-1.amazonaws.com #need to provide dns for efs
+    server: fs-0362cc20576870ee7.efs.us-east-1.amazonaws.com #need to provide dns for efs
     path: "/"
 
 ---
