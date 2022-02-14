@@ -1,0 +1,18 @@
+{
+    "fileLocations": [
+        {
+            "URIs": [
+                "s3://ml-modelsgraphss3/airports/airport-data.csv"
+            ]
+        },
+        {
+            "URIPrefixes": [
+                "s3://ml-modelsgraphss3/airports/"
+            ]
+        }
+    ],
+    "globalUploadSettings": {
+        "format": "CSV",
+        "delimiter": ","
+    }
+}

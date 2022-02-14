@@ -47,13 +47,13 @@ Para llevar a cabo el desarrollo se utilizará el dataset de demoras y cancelaci
 ``` $ unzip airline-delay-and-cancellation-data-2009-2018.zip -d raw/```
 <br></br>
  Remove zipped data to save space
-``` $ aws s3 sync raw/ s3://[ml-dataset-raw-s3]/raw/```
+``` $ aws s3 sync raw/ s3://ml-dataset-raw-s3/raw/```
 <br></br>
  Remove zipped data to save space [optional]
 ```$ rm airline-delay-and-cancellation-data-2009-2018.zip```
 
 En este punto al correr el comando el siguiente comando debería aparecer un archivo CSV por año en el directorio de s3:
-```aws s3 sync raw/ s3://[ml-dataset-raw-s3]/raw/```
+```aws s3 sync raw/ s3://ml-dataset-raw-s3/raw/```
 
 <br></br>
 
@@ -324,9 +324,147 @@ En este punto estamos ya capacitados para ejecutar el dag y asi obtener nuestro 
 ![](imgs/20220211-071849.png)
 
 Una vez que finalice este proceso, podremos ver las tablas creadas en la DB como asi tambien si queremos, explorar las mismas.
+A su vez se crean archivos en el Bucket S3 en el directorio row-out/ archivos CSV con la misma informacion que se guardo en las tablas de postgres. Estos archivos son los utilizados por Sagemaker para producir y entrenar nuestro modelo de ML
 
 ![](imgs/20220211-072044.png)
 
 ![](imgs/20220211-072112.png)
 
-# CONTINUARA...
+18 - En este punto nos dirigimos al servicio Sagemaker. Una vez en el panel, hacemos click en Abrir Sagemaker Studio
+
+![](imgs/20220214-075706.png)
+
+18.1 - Primero debemos configurar el dominio de Sagemaker, donde eligiremos un nombre para el perfil del usuario y dejaremos la configuracion rapida
+
+![](imgs/20220214-075949.png)
+
+18.2 Elegimos nuestra VPC y las Subnets de la misma
+
+![](imgs/20220214-080211.png)
+
+Y aguardamos que se termine de crear nuestro dominio de Sagemaker. Esto demora unos minutos. Finalmente esta disponible. Hacemos click en Lanzar aplicacion y luego en Studio
+
+![](imgs/20220214-080907.png)
+
+y aguaramos un minutos mas mientras se lanza el servidor de Jupiter Notebooks.
+
+![](imgs/20220214-080955.png)
+
+Una vez inicializado veremos un dashboar similar a este
+
+![](imgs/20220214-081202.png)
+
+18.3 - En este punto debemos subir nuestra notebook y nuestro flow a Sagemaker. Los mismos se encuentra en el directorio notebooks/ y tambien creamos en el dominio el directorio from_s3
+
+![](imgs/20220214-081901.png)
+
+18.4 - (Aclaracion: debido al perfil de laboratorio que se uso, no fue posible entrenar el modelo, solo se hizo el modelo y se fiteo. Por perfil LAB -> error 413).
+Por esto recien explicado, y como no podemos tener el dataset entrenado con los modelos tanto XGBoost y RCF, se crea un dataset, donde no estan los dias anomalos en el delay ni la prediccion, se crea un dataset con toda la data fiteada, para ser usado y demostrar como se usa y configura QuickSight
+Lo primero que vamos a ejecutar va a ser el flow y la notebook Ml-Airport-01-XGBoost-v2. No se describen en este Readme, ya que tiene en la misma notebook celdas de Markdown donde se explica brevemente cada una. Al ejecutar la notebook, correr celda por cela desde la primera y esperando que la anterior finalice como asi tambien restarteando el kernel cada vez que sea solicitado. 
+
+Aguardar que se cargue el flow y la notebook
+
+![](imgs/20220214-082334.png)
+![](imgs/20220214-082348.png)
+
+Una vez cargado, nos dirigimos al notebook y lo ejecutamos. Cuando realizamos el Job y la salida al S3, demorara unos cuantos minutos
+
+![](imgs/20220214-084219.png)
+
+Luego que finalice, continuamos corriendo las siguientes celdas.
+
+### Nota: Si en la celda 13 tenemos un error "AttributeError: 'NoneType' object has no attribute 'items'" Es que hay que reiniciar el kernel por la instalacion del modulo del punto 12, pero podemos continuar asi"""
+
+Podemos dirigirnos al dash de Sagemaker y navegar por el menu lateral donde podremos ver los trabajos de procesamiento, entrenamiento, inferencia, etc.
+
+![](imgs/20220214-085413.png)
+
+![](imgs/20220214-085512.png)
+
+![](imgs/20220214-091459.png)
+
+Luego de esto deberiamos seguir con el proceso de entrenamiento, pero debido a los permisos de lab, no podemos avanzar. La notebook no incluye la exportacion de la data a S3 ni a una DB. Si queremos continuar con troa notebook, podriamos correr la Ml-Airport-03-RandomCutForest, la cual incluye todo completo, hasta la carga de las imagenes en S3, pero por lo ya expuesto anteriormente (permisos) no se puede correr.
+
+19 - QuickSight
+
+#### Que es AWS QuickSght? ####
+
+Amazon QuickSight permite que todos los miembros de su organización comprendan sus datos mediante preguntas en lenguaje natural, la exploración a través de paneles interactivos o la búsqueda automática de patrones y valores atípicos impulsada ​​por machine learning.
+
+19.1 - Accedemos a QuickSight y si nunca lo hicimos, nos pedira que no loguiemos en el servicio
+
+![](imgs/20220214-095948.png)
+
+19.2 - Elegimos el tier Enterprise
+
+![](imgs/20220214-100054.png)
+
+
+19.3 completamos con la informacion solicitada
+
+![](imgs/20220214-100229.png)
+
+![](imgs/20220214-100302.png)
+
+19.4 - Seleccionamos Amazon S3, donde esta el dataset terminado
+
+![](imgs/20220214-100406.png)
+
+Finalizar y esperamos
+
+![](imgs/20220214-100616.png)
+
+19.4 - En este punto debemos darle permisos a Quicksight para poder acceder al S3 y asignarle el rol. Para esto vamos al menu de la derecha arriba y seleccionamos Manage Quicksight
+
+![](imgs/20220214-113558.png)
+
+y luego a Security & permissions
+
+![](imgs/20220214-113820.png)
+
+Debemos verificar que tenga asignado un Rol que tenga acceso full a los recuros de S3. Si tiene que crear un Rol, primero cree un politica con permisos full al Bucket S3 donde se guardan los dataset, luego cree un Rol y asignele esa politica
+
+19.4 - Luego de ingresar, sobre el menu lateral vamos a Datasets y luego a New datasets
+
+![](imgs/20220214-100858.png)
+
+19.5 - En este punto seleccionamos nuestra fuente de datos, que es S3
+
+![](imgs/20220214-100949.png)
+
+Nos va a pedir que le demos un nombre al source y tambien que subamos un manifiesto, donde se especifica la uri del bucket y del dataset. El manifiesto es similar a esto y se encuentra dentro del directorio notebooks
+
+![](imgs/20220214-113247.png)
+
+Lo subimos y connect
+
+![](imgs/20220214-101219.png)
+
+![](imgs/20220214-101247.png)
+
+Tocamos en Visualize y estaremos en el dashboard de nuestro panel de graficos.
+
+![](imgs/20220214-114129.png)
+
+Aqui simplemente lo que queda es crear los graficos necesarios y solicitas por el negocio
+
+
+![](imgs/20220214-121241.png)
+
+Estos son unas muestras de como quedaria. El grafico de las anomalias, al momento no cargo ya que tarda bastante en analizar el dataset
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
