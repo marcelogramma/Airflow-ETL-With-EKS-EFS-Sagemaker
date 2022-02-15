@@ -1,7 +1,7 @@
 
 # Airflow ETL With EKS EFS & Sagemaker #
 <p></p>
-[English version.](readme_eng.md)
+[English version](readme_eng.md)
 <p></p>
 ### Diagrama de la solución ###
 
