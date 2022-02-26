@@ -123,7 +123,7 @@ thus started the creation of the network stack. At this point, the VPC, Subnets,
 
 ![](imgs/20220202-210158.png)
 
-following
+Next
 
 ![](imgs/20220202-210233.png)
 
@@ -205,7 +205,7 @@ Then we verify that it is working with the command:
 
 ![](imgs/20220202-221835.png)
 
-We define a name and the role, the rest by default and we do the following
+We define a name and the role, the rest by default and press Next
 
 ![](imgs/20220202-222004.png)
 
@@ -213,7 +213,7 @@ We define the type of capacity, the AMI and the type of instance with its disk s
 
 ![](imgs/20220211-070917.png)
 
-The number of nodes for scaling and following
+Nodes number for scaling and press Next
 
 ![](imgs/20220211-071235.png)
 
